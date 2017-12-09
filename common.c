@@ -17,12 +17,17 @@ void flushing() {
  */
 void int_handler(int dummy) {
 	char input;
-	printf("\nControl+c");
-	printf("\nGet Interrupt Signal.");
-	printf("\nDo you want to exit myMOVIE program? (y/N) ");
-	input = getchar();
-	if (input == 'Y' || input == 'y') {
-		exit(0);
+	printf("\n\nGet Interrupt Signal.");
+	while (1) {
+		printf("\nDo you want to exit myMOVIE program? (y/N) ");
+		input = getchar(); flushing();
+		if (input == 'Y' || input == 'y') {
+			exit(0);
+		} else if (input == 'N' || input == 'n') {
+			break;
+		} else {
+			printf("Wrong command\n");
+		}
 	}
 	printf("\nPress enter key to contniue\n");
 	return;
@@ -31,7 +36,7 @@ void int_handler(int dummy) {
 /**
  * save 와 update 옵션 체크하기 위함
  */
-int is_option_existed(char* options, int numOption, char an_option) {  // 저장된 옵션, 옵션 개수, 확인 할 옵션
+int is_option_existed(char* options, int numOption, char an_option) {
 	int i;
 	for (i=0; i<numOption; i++) {
 		if (options[i] == an_option) {
@@ -45,7 +50,7 @@ int is_option_existed(char* options, int numOption, char an_option) {  // 저장
  * colon(':') 을 "??;"로 바꿈
  */
 char* change_colon (char* str) {
-	char* newstr;  // 바뀐 정보를 저장할 문자열
+	char* newstr;
 	int len = 0;
 	int i = 0, j = 0;
 
@@ -73,7 +78,7 @@ char* change_colon (char* str) {
  *  "??;" 을 colon(':')로 바꿈
  */
 char* recover_colon (char* str) {
-	char* newstr;  // 바뀐 정보를 저장할 문자열
+	char* newstr;
 	int len = 0;
 	int i = 0, j = 0;
 
@@ -117,7 +122,7 @@ int is_file_existed (char* filename) {
 int rename_file (char* filename) {
 	time_t timer;
 	struct tm* tm_info;
-	char buffer[100];  // 시간 정보 저장
+	char buffer[100];
   char new_filename[100];
 
 	time(&timer);
